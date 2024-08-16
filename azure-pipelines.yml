@@ -46,6 +46,7 @@ steps:
     arguments: '--configuration $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
+  displayName: "Deploy Code Task"
   inputs:
     command: 'publish'
     publishWebProjects: true
