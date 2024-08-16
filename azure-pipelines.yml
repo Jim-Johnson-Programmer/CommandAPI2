@@ -44,3 +44,12 @@ steps:
     command: test
     projects: '**/test/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: "Dotnet publish task"
+  inputs: 
+   command: publish
+   publishWebProjects: false
+   projects: '**/test/*.csproj'
+   arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+
