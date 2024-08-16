@@ -15,12 +15,12 @@ variables:                               #variables used below as $(myVariables)
   buildConfiguration: 'Release'
 
 steps:
-- task: UseDotNet@2
-  displayName: 'Install 3.1 .NET Core sdk Task'
-  inputs:
-    packageType: sdk
-    version: 3.1.x
-    installationPath: $(Agent.ToolsDirectory)/dotnet
+#- task: UseDotNet@2
+#  displayName: 'Install 3.1 .NET Core sdk Task'
+#  inputs:
+#    packageType: sdk
+#    version: 3.1.x
+#    installationPath: $(Agent.ToolsDirectory)/dotnet
 
 - task: NuGetToolInstaller@1             #Install nuget--first step 
   displayName: 'Nuget Install Task'
@@ -30,13 +30,11 @@ steps:
   inputs:
     restoreSolution: '$(solution)'              #Use solution variable
 
-- task: VSBuild@1                        #Trigger build 
-  displayName: 'Running Compiler Task'
+- task: DotNetCoreCLI@2
   inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    command: 'build'
+    arguments: '--configuration $(buildConfiguration)'
+  displayName: 'dotnet build $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
   displayName: "Running Unit Tests Task"
