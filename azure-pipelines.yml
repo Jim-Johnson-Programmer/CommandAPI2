@@ -53,3 +53,6 @@ steps:
    projects: '**/test/*.csproj'
    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
 
+- task: PublishBuildArtifacts@1
+  displayName: 'publish artifacts'
+  
