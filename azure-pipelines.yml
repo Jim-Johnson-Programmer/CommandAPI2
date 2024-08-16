@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:                                    #Grab this image
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
 
 variables:                               #variables used below as $(myVariables)
   solution: '**/*.sln'
